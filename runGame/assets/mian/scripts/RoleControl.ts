@@ -148,7 +148,7 @@ export class RoleControl extends Component {
         // 测试相关
         this.HP = 3;
         this.curEquipAttr |= EQUIP_ATTR.MOVE_SLOW;
-        this.curEquipAttr |= EQUIP_ATTR.AUTO_SWITCH;
+        // this.curEquipAttr |= EQUIP_ATTR.AUTO_SWITCH;
         this.curEquipAttr |= EQUIP_ATTR.ARROW_SLOW;
         this.onEquipChanged();
     }
