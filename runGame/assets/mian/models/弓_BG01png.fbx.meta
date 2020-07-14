@@ -1,0 +1,242 @@
+{
+  "ver": "1.3.21",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "40ff65e5-7f61-4cc2-9e93-1485dc43f557",
+  "files": [],
+  "subMetas": {
+    "95799": {
+      "importer": "gltf-material",
+      "uuid": "40ff65e5-7f61-4cc2-9e93-1485dc43f557@95799",
+      "displayName": "",
+      "id": "95799",
+      "name": "Material #63-1.material",
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 1
+      }
+    },
+    "5b558": {
+      "importer": "gltf-mesh",
+      "uuid": "40ff65e5-7f61-4cc2-9e93-1485dc43f557@5b558",
+      "displayName": "",
+      "id": "5b558",
+      "name": "Object003.mesh",
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".json",
+        ".bin"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0
+      }
+    },
+    "7d104": {
+      "importer": "gltf-mesh",
+      "uuid": "40ff65e5-7f61-4cc2-9e93-1485dc43f557@7d104",
+      "displayName": "",
+      "id": "7d104",
+      "name": "Box020.mesh",
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".json",
+        ".bin"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 1
+      }
+    },
+    "859dc": {
+      "importer": "gltf-mesh",
+      "uuid": "40ff65e5-7f61-4cc2-9e93-1485dc43f557@859dc",
+      "displayName": "",
+      "id": "859dc",
+      "name": "Box019.mesh",
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".json",
+        ".bin"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 2
+      }
+    },
+    "73b7f": {
+      "importer": "gltf-animation",
+      "uuid": "40ff65e5-7f61-4cc2-9e93-1485dc43f557@73b7f",
+      "displayName": "",
+      "id": "73b7f",
+      "name": "Take 001.animation",
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "events": [
+          {
+            "frame": 0.13333333333333333,
+            "functionName": "动画事件",
+            "parameters": []
+          }
+        ],
+        "gltfIndex": 0,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 0.6666666865348816
+        },
+        "wrapMode": 2,
+        "speed": 1
+      }
+    },
+    "438fe": {
+      "importer": "gltf-skeleton",
+      "uuid": "40ff65e5-7f61-4cc2-9e93-1485dc43f557@438fe",
+      "displayName": "",
+      "id": "438fe",
+      "name": "UnnamedSkeleton.skeleton",
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0,
+        "jointsLength": 4
+      }
+    },
+    "10c43": {
+      "importer": "gltf-embeded-image",
+      "uuid": "40ff65e5-7f61-4cc2-9e93-1485dc43f557@10c43",
+      "displayName": "",
+      "id": "10c43",
+      "name": "Map #29.image",
+      "ver": "1.0.2",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0
+      }
+    },
+    "25df9": {
+      "importer": "texture",
+      "uuid": "40ff65e5-7f61-4cc2-9e93-1485dc43f557@25df9",
+      "displayName": "",
+      "id": "25df9",
+      "name": "Map #29.texture",
+      "ver": "1.0.19",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "premultiplyAlpha": false,
+        "anisotropy": 1,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/mian/models/BG01/BG01.png"
+      }
+    },
+    "27e41": {
+      "importer": "gltf-material",
+      "uuid": "40ff65e5-7f61-4cc2-9e93-1485dc43f557@27e41",
+      "displayName": "",
+      "id": "27e41",
+      "name": "Material #63-0.material",
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0
+      }
+    },
+    "09163": {
+      "importer": "gltf-scene",
+      "uuid": "40ff65e5-7f61-4cc2-9e93-1485dc43f557@09163",
+      "displayName": "",
+      "id": "09163",
+      "name": "弓_BG01png.prefab",
+      "ver": "1.0.11",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0
+      }
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #29",
+        "remap": "db://assets/mian/models/BG01/BG01.png",
+        "uri": "40ff65e5-7f61-4cc2-9e93-1485dc43f557@10c43"
+      }
+    ],
+    "animationImportSettings": [
+      {
+        "name": "Take 001",
+        "duration": 0.6666666865348816,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "Take 001",
+            "from": 0,
+            "to": 0.6666666865348816,
+            "wrapMode": 2
+          }
+        ]
+      }
+    ],
+    "redirect": "40ff65e5-7f61-4cc2-9e93-1485dc43f557@09163",
+    "assetFinder": {
+      "meshes": [
+        "40ff65e5-7f61-4cc2-9e93-1485dc43f557@5b558",
+        "40ff65e5-7f61-4cc2-9e93-1485dc43f557@7d104",
+        "40ff65e5-7f61-4cc2-9e93-1485dc43f557@859dc"
+      ],
+      "skeletons": [
+        "40ff65e5-7f61-4cc2-9e93-1485dc43f557@438fe"
+      ],
+      "textures": [
+        "40ff65e5-7f61-4cc2-9e93-1485dc43f557@25df9"
+      ],
+      "materials": [
+        "40ff65e5-7f61-4cc2-9e93-1485dc43f557@27e41",
+        "40ff65e5-7f61-4cc2-9e93-1485dc43f557@95799"
+      ],
+      "scenes": [
+        "40ff65e5-7f61-4cc2-9e93-1485dc43f557@09163"
+      ]
+    }
+  }
+}

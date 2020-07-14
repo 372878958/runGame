@@ -1,0 +1,199 @@
+{
+  "ver": "1.3.21",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "8ed2a430-dc28-48c7-881a-603d79354e01",
+  "files": [],
+  "subMetas": {
+    "49299": {
+      "importer": "gltf-mesh",
+      "uuid": "8ed2a430-dc28-48c7-881a-603d79354e01@49299",
+      "displayName": "",
+      "id": "49299",
+      "name": "Plane012.mesh",
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".json",
+        ".bin"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 2
+      }
+    },
+    "f620b": {
+      "importer": "gltf-mesh",
+      "uuid": "8ed2a430-dc28-48c7-881a-603d79354e01@f620b",
+      "displayName": "",
+      "id": "f620b",
+      "name": "Plane011.mesh",
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".json",
+        ".bin"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0
+      }
+    },
+    "b43d4": {
+      "importer": "gltf-mesh",
+      "uuid": "8ed2a430-dc28-48c7-881a-603d79354e01@b43d4",
+      "displayName": "",
+      "id": "b43d4",
+      "name": "Plane013.mesh",
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".json",
+        ".bin"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 1
+      }
+    },
+    "73b7f": {
+      "importer": "gltf-animation",
+      "uuid": "8ed2a430-dc28-48c7-881a-603d79354e01@73b7f",
+      "displayName": "",
+      "id": "73b7f",
+      "name": "Take 001.animation",
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 1.6666666269302368
+        },
+        "events": []
+      }
+    },
+    "00be6": {
+      "importer": "gltf-embeded-image",
+      "uuid": "8ed2a430-dc28-48c7-881a-603d79354e01@00be6",
+      "displayName": "",
+      "id": "00be6",
+      "name": "Map #30.image",
+      "ver": "1.0.2",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0
+      }
+    },
+    "1cf40": {
+      "importer": "texture",
+      "uuid": "8ed2a430-dc28-48c7-881a-603d79354e01@1cf40",
+      "displayName": "",
+      "id": "1cf40",
+      "name": "Map #30.texture",
+      "ver": "1.0.19",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "premultiplyAlpha": false,
+        "anisotropy": 1,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/mian/models/法阵/阵.png"
+      }
+    },
+    "a8be7": {
+      "importer": "gltf-material",
+      "uuid": "8ed2a430-dc28-48c7-881a-603d79354e01@a8be7",
+      "displayName": "",
+      "id": "a8be7",
+      "name": "Material #64.material",
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0
+      }
+    },
+    "9693a": {
+      "importer": "gltf-scene",
+      "uuid": "8ed2a430-dc28-48c7-881a-603d79354e01@9693a",
+      "displayName": "",
+      "id": "9693a",
+      "name": "法阵_阵png_a3.prefab",
+      "ver": "1.0.11",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0
+      }
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #30",
+        "remap": "db://assets/mian/models/法阵/阵.png",
+        "uri": "8ed2a430-dc28-48c7-881a-603d79354e01@00be6"
+      }
+    ],
+    "animationImportSettings": [
+      {
+        "name": "Take 001",
+        "duration": 1.6666666269302368,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "Take 001",
+            "from": 0,
+            "to": 1.6666666269302368,
+            "wrapMode": 2
+          }
+        ]
+      }
+    ],
+    "redirect": "8ed2a430-dc28-48c7-881a-603d79354e01@9693a",
+    "assetFinder": {
+      "meshes": [
+        "8ed2a430-dc28-48c7-881a-603d79354e01@f620b",
+        "8ed2a430-dc28-48c7-881a-603d79354e01@b43d4",
+        "8ed2a430-dc28-48c7-881a-603d79354e01@49299"
+      ],
+      "skeletons": [],
+      "textures": [
+        "8ed2a430-dc28-48c7-881a-603d79354e01@1cf40"
+      ],
+      "materials": [
+        "8ed2a430-dc28-48c7-881a-603d79354e01@a8be7"
+      ],
+      "scenes": [
+        "8ed2a430-dc28-48c7-881a-603d79354e01@9693a"
+      ]
+    }
+  }
+}

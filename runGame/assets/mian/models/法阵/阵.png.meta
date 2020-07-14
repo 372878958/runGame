@@ -1,0 +1,40 @@
+{
+  "ver": "1.0.18",
+  "importer": "image",
+  "imported": true,
+  "uuid": "beb880e8-9adf-4e47-8008-75c4545064b2",
+  "files": [
+    ".png",
+    ".json"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "beb880e8-9adf-4e47-8008-75c4545064b2@6c48a",
+      "displayName": "阵",
+      "id": "6c48a",
+      "name": "texture",
+      "ver": "1.0.19",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "premultiplyAlpha": false,
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "beb880e8-9adf-4e47-8008-75c4545064b2"
+      }
+    }
+  },
+  "userData": {
+    "type": "texture",
+    "redirect": "beb880e8-9adf-4e47-8008-75c4545064b2@6c48a"
+  }
+}

@@ -1,0 +1,281 @@
+{
+  "ver": "1.3.21",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "da2ec916-ca39-4b17-b20b-2c2aab7b48e3",
+  "files": [],
+  "subMetas": {
+    "0ecd8": {
+      "importer": "gltf-mesh",
+      "uuid": "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@0ecd8",
+      "displayName": "",
+      "id": "0ecd8",
+      "name": "Plane009.mesh",
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".json",
+        ".bin"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0
+      }
+    },
+    "448c8": {
+      "importer": "gltf-mesh",
+      "uuid": "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@448c8",
+      "displayName": "",
+      "id": "448c8",
+      "name": "Plane007.mesh",
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".json",
+        ".bin"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 1
+      }
+    },
+    "5fb08": {
+      "importer": "gltf-mesh",
+      "uuid": "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@5fb08",
+      "displayName": "",
+      "id": "5fb08",
+      "name": "Plane010.mesh",
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".json",
+        ".bin"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 2
+      }
+    },
+    "4f6e1": {
+      "importer": "gltf-mesh",
+      "uuid": "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@4f6e1",
+      "displayName": "",
+      "id": "4f6e1",
+      "name": "Plane008.mesh",
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".json",
+        ".bin"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 3
+      }
+    },
+    "73b7f": {
+      "importer": "gltf-animation",
+      "uuid": "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@73b7f",
+      "displayName": "",
+      "id": "73b7f",
+      "name": "Take 001.animation",
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 3
+        },
+        "events": []
+      }
+    },
+    "00be6": {
+      "importer": "gltf-embeded-image",
+      "uuid": "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@00be6",
+      "displayName": "",
+      "id": "00be6",
+      "name": "Map #30.image",
+      "ver": "1.0.2",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0
+      }
+    },
+    "634fc": {
+      "importer": "gltf-embeded-image",
+      "uuid": "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@634fc",
+      "displayName": "",
+      "id": "634fc",
+      "name": "Map #32.image",
+      "ver": "1.0.2",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 1
+      }
+    },
+    "1cf40": {
+      "importer": "texture",
+      "uuid": "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@1cf40",
+      "displayName": "",
+      "id": "1cf40",
+      "name": "Map #30.texture",
+      "ver": "1.0.19",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "premultiplyAlpha": false,
+        "anisotropy": 1,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/mian/models/法阵/阵.png"
+      }
+    },
+    "16e33": {
+      "importer": "texture",
+      "uuid": "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@16e33",
+      "displayName": "",
+      "id": "16e33",
+      "name": "Map #32.texture",
+      "ver": "1.0.19",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "premultiplyAlpha": false,
+        "anisotropy": 1,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/mian/models/法阵/阵.png"
+      }
+    },
+    "a8be7": {
+      "importer": "gltf-material",
+      "uuid": "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@a8be7",
+      "displayName": "",
+      "id": "a8be7",
+      "name": "Material #64.material",
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0
+      }
+    },
+    "7890a": {
+      "importer": "gltf-material",
+      "uuid": "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@7890a",
+      "displayName": "",
+      "id": "7890a",
+      "name": "Material #65.material",
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 1
+      }
+    },
+    "e1dc9": {
+      "importer": "gltf-scene",
+      "uuid": "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@e1dc9",
+      "displayName": "",
+      "id": "e1dc9",
+      "name": "法阵_阵png_a2.prefab",
+      "ver": "1.0.11",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0
+      }
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #30",
+        "remap": "db://assets/mian/models/法阵/阵.png",
+        "uri": "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@00be6"
+      },
+      {
+        "name": "Map #32",
+        "remap": "db://assets/mian/models/法阵/阵.png",
+        "uri": "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@634fc"
+      }
+    ],
+    "animationImportSettings": [
+      {
+        "name": "Take 001",
+        "duration": 3,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "Take 001",
+            "from": 0,
+            "to": 3,
+            "wrapMode": 2
+          }
+        ]
+      }
+    ],
+    "redirect": "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@e1dc9",
+    "assetFinder": {
+      "meshes": [
+        "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@0ecd8",
+        "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@448c8",
+        "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@5fb08",
+        "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@4f6e1"
+      ],
+      "skeletons": [],
+      "textures": [
+        "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@1cf40",
+        "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@16e33"
+      ],
+      "materials": [
+        "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@a8be7",
+        "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@7890a"
+      ],
+      "scenes": [
+        "da2ec916-ca39-4b17-b20b-2c2aab7b48e3@e1dc9"
+      ]
+    }
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "ver": "1.3.21",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "9dada034-0bb9-4310-9bf8-e33b3c3cbc52",
+  "files": [],
+  "subMetas": {
+    "68745": {
+      "importer": "gltf-scene",
+      "uuid": "9dada034-0bb9-4310-9bf8-e33b3c3cbc52@68745",
+      "displayName": "",
+      "id": "68745",
+      "name": "Role.prefab",
+      "ver": "1.0.11",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0
+      }
+    },
+    "07c80": {
+      "importer": "gltf-mesh",
+      "uuid": "9dada034-0bb9-4310-9bf8-e33b3c3cbc52@07c80",
+      "displayName": "",
+      "id": "07c80",
+      "name": "Role.mesh",
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".json",
+        ".bin"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0
+      }
+    },
+    "73b7f": {
+      "importer": "gltf-animation",
+      "uuid": "9dada034-0bb9-4310-9bf8-e33b3c3cbc52@73b7f",
+      "displayName": "",
+      "id": "73b7f",
+      "name": "Take 001.animation",
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 0.6666666865348816
+        },
+        "events": []
+      }
+    },
+    "438fe": {
+      "importer": "gltf-skeleton",
+      "uuid": "9dada034-0bb9-4310-9bf8-e33b3c3cbc52@438fe",
+      "displayName": "",
+      "id": "438fe",
+      "name": "UnnamedSkeleton.skeleton",
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0,
+        "jointsLength": 16
+      }
+    },
+    "a96a6": {
+      "importer": "texture",
+      "uuid": "9dada034-0bb9-4310-9bf8-e33b3c3cbc52@a96a6",
+      "displayName": "",
+      "id": "a96a6",
+      "name": "贴图 #1.texture",
+      "ver": "1.0.19",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "premultiplyAlpha": false,
+        "anisotropy": 1,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/mian/models/Role/贴图 #1.png"
+      }
+    },
+    "5ebab": {
+      "importer": "gltf-material",
+      "uuid": "9dada034-0bb9-4310-9bf8-e33b3c3cbc52@5ebab",
+      "displayName": "",
+      "id": "5ebab",
+      "name": "Role.material",
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0
+      }
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "贴图 #1",
+        "remap": "db://assets/mian/models/Role/贴图 #1.png",
+        "uri": "db://assets/mian/models/Role/贴图 #1.png"
+      }
+    ],
+    "animationImportSettings": [
+      {
+        "name": "Take 001",
+        "duration": 0.6666666865348816,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "Take 001",
+            "from": 0,
+            "to": 0.6666666865348816,
+            "wrapMode": 2
+          }
+        ]
+      }
+    ],
+    "redirect": "9dada034-0bb9-4310-9bf8-e33b3c3cbc52@68745",
+    "assetFinder": {
+      "meshes": [
+        "9dada034-0bb9-4310-9bf8-e33b3c3cbc52@07c80"
+      ],
+      "skeletons": [
+        "9dada034-0bb9-4310-9bf8-e33b3c3cbc52@438fe"
+      ],
+      "textures": [
+        "9dada034-0bb9-4310-9bf8-e33b3c3cbc52@a96a6"
+      ],
+      "materials": [
+        "9dada034-0bb9-4310-9bf8-e33b3c3cbc52@5ebab"
+      ],
+      "scenes": [
+        "9dada034-0bb9-4310-9bf8-e33b3c3cbc52@68745"
+      ]
+    }
+  }
+}

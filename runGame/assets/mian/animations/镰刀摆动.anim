@@ -1,0 +1,55 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "镰刀摆动",
+  "_objFlags": 0,
+  "_native": "",
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 2,
+  "events": [],
+  "_duration": 3.9833333333333334,
+  "_keys": [
+    [
+      0,
+      2,
+      3.9833333333333334
+    ]
+  ],
+  "_stepness": 0,
+  "_curves": [
+    {
+      "modifiers": [
+        "eulerAngles"
+      ],
+      "data": {
+        "keys": 0,
+        "values": [
+          {
+            "__type__": "cc.Vec3",
+            "x": 0,
+            "y": 0,
+            "z": -60
+          },
+          {
+            "__type__": "cc.Vec3",
+            "x": 0,
+            "y": 0,
+            "z": 60
+          },
+          {
+            "__type__": "cc.Vec3",
+            "x": 0,
+            "y": 0,
+            "z": -60
+          }
+        ],
+        "easingMethods": {
+          "0": "quartInOut",
+          "1": "quartInOut"
+        }
+      }
+    }
+  ],
+  "_commonTargets": [],
+  "_hash": 3972840308
+}
