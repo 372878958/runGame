@@ -1,0 +1,124 @@
+{
+  "ver": "1.3.21",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "58da84d2-bf71-4e48-8391-457cb098c774",
+  "files": [],
+  "subMetas": {
+    "11873": {
+      "importer": "gltf-material",
+      "uuid": "58da84d2-bf71-4e48-8391-457cb098c774@11873",
+      "displayName": "",
+      "id": "11873",
+      "name": "Material #0.material",
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0
+      }
+    },
+    "3f0c5": {
+      "importer": "gltf-mesh",
+      "uuid": "58da84d2-bf71-4e48-8391-457cb098c774@3f0c5",
+      "displayName": "",
+      "id": "3f0c5",
+      "name": "Box002.mesh",
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".json",
+        ".bin"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0
+      }
+    },
+    "32d96": {
+      "importer": "gltf-embeded-image",
+      "uuid": "58da84d2-bf71-4e48-8391-457cb098c774@32d96",
+      "displayName": "",
+      "id": "32d96",
+      "name": "Map #0.image",
+      "ver": "1.0.2",
+      "imported": true,
+      "files": [
+        ".png",
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0
+      }
+    },
+    "ab932": {
+      "importer": "texture",
+      "uuid": "58da84d2-bf71-4e48-8391-457cb098c774@ab932",
+      "displayName": "",
+      "id": "ab932",
+      "name": "Map #0.texture",
+      "ver": "1.0.19",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "premultiplyAlpha": false,
+        "anisotropy": 1,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/mian/models/BG01/BG01.png"
+      }
+    },
+    "99baa": {
+      "importer": "gltf-scene",
+      "uuid": "58da84d2-bf71-4e48-8391-457cb098c774@99baa",
+      "displayName": "",
+      "id": "99baa",
+      "name": "炮_BG01png.prefab",
+      "ver": "1.0.11",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {},
+      "userData": {
+        "gltfIndex": 0
+      }
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "Map #0",
+        "remap": "db://assets/mian/models/BG01/BG01.png",
+        "uri": "58da84d2-bf71-4e48-8391-457cb098c774@32d96"
+      }
+    ],
+    "redirect": "58da84d2-bf71-4e48-8391-457cb098c774@99baa",
+    "assetFinder": {
+      "meshes": [
+        "58da84d2-bf71-4e48-8391-457cb098c774@3f0c5"
+      ],
+      "skeletons": [],
+      "textures": [
+        "58da84d2-bf71-4e48-8391-457cb098c774@ab932"
+      ],
+      "materials": [
+        "58da84d2-bf71-4e48-8391-457cb098c774@11873"
+      ],
+      "scenes": [
+        "58da84d2-bf71-4e48-8391-457cb098c774@99baa"
+      ]
+    }
+  }
+}

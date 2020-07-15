@@ -3,7 +3,7 @@ import { GridAnimation } from './GridAnimation';
 import { AnimationEventCom } from './AnimationEventCom';
 import { ROLE_STATE, RoleControl, EQUIP_ATTR } from './RoleControl';
 import { GridBase } from './GridBase';
-const { ccclass, property } = _decorator;
+const { ccclass, property, menu } = _decorator;
 
 // 弩箭状态
 enum CROSSBOW_STATE {
@@ -13,6 +13,7 @@ enum CROSSBOW_STATE {
 }
 
 @ccclass('GridCrossbow')
+@menu("格子/弩箭台")
 export class GridCrossbow extends GridAnimation {
 
     @property({

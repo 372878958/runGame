@@ -21,6 +21,7 @@ export enum ROLE_STATE {
     BE_MOVE_LEFT,   // 被向左移动
     BE_MOVE_RIGHT,  // 被向右移动
     DEAD,           // 死亡
+    TRANSFER,       // 传送
 }
 
 // 移动方向
@@ -319,6 +320,11 @@ export class RoleControl extends Component {
                 return;
             case ROLE_STATE.DEAD:
                 // 角色死亡啥也干不了
+                return;
+            case ROLE_STATE.TRANSFER:
+                onStand();
+                // 被传送了 执行移动后逻辑
+                this.onMoveAfter();
                 return;
         }
 
