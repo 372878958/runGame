@@ -11,6 +11,8 @@ export enum GRID_TYPE {
     实体伤害,
     击退伤害,
     触发,
+    滑块,
+    // slider
 }
 Enum(GRID_TYPE);
 
@@ -235,13 +237,18 @@ export class GridBase extends PositionCorrection {
                 }
                 break;
             case GRID_TYPE.实体:
+            case GRID_TYPE.滑块:
                 if (Vec3.strictEquals(selfPos, tarPos)) { // 遇到障碍
                     return ROLE_STATE.MOVE_BACK;
                 }
                 --tarPos.y;
                 if (Vec3.strictEquals(selfPos, tarPos)) { // 站在地面
                     this.playerIsStandByThis = true;
-                    return ROLE_STATE.STAND;
+                    if (gridType == GRID_TYPE.滑块) {
+                        return ROLE_STATE.SLIDER;
+                    } else {
+                        return ROLE_STATE.STAND;
+                    }
                 }
                 break;
             case GRID_TYPE.区域伤害:
@@ -273,6 +280,7 @@ export class GridBase extends PositionCorrection {
         switch (this.getType()) {
             case GRID_TYPE.实体:
             case GRID_TYPE.实体伤害:
+            case GRID_TYPE.滑块:
                 if (Vec3.strictEquals(selfPos, tarPos)) { // 遇到障碍
                     return ROLE_STATE.BLOCK;
                 }
@@ -303,6 +311,7 @@ export class GridBase extends PositionCorrection {
                 }
                 break;
             case GRID_TYPE.实体:
+            case GRID_TYPE.滑块:
                 if (Vec3.strictEquals(selfPos, tarPos)) { // 被实体推走
                     this._isPlayerEnter = true;
                     if (this.curMoveDir) {

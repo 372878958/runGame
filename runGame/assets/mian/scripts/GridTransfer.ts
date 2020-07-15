@@ -21,17 +21,22 @@ export class GridTransfer extends GridBase {
     })
     protected offsetPos: Vec3 = v3(0, 0, 0);
 
+    protected isCanTransfer = true;
+
     // 移动后逻辑
     onMoveAfter(pos: Vec3): ROLE_STATE {
         let state: ROLE_STATE = null;
         if (super.onMoveAfter) {
             state = super.onMoveAfter(pos);
         }
-        if (this._isPlayerEnter && RoleControl.instance.getRoleState() != ROLE_STATE.TRANSFER && this.targetGrid) {
+        if (this._isPlayerEnter && this.isCanTransfer && RoleControl.instance.getRoleState() != ROLE_STATE.TRANSFER && this.targetGrid) {
+            this.isCanTransfer = false;
             // 传送目标
             let pos = v3(this.targetGrid.getPos());
             RoleControl.instance.node.worldPosition = pos.add(this.offsetPos);
             return ROLE_STATE.TRANSFER;
+        } else {
+            this.isCanTransfer = !this._isPlayerEnter;
         }
         return state;
     }

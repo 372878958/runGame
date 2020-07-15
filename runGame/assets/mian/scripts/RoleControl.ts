@@ -22,6 +22,7 @@ export enum ROLE_STATE {
     BE_MOVE_RIGHT,  // 被向右移动
     DEAD,           // 死亡
     TRANSFER,       // 传送
+    SLIDER,         // 滑动中
 }
 
 // 移动方向
@@ -326,6 +327,10 @@ export class RoleControl extends Component {
                 // 被传送了 执行移动后逻辑
                 this.onMoveAfter();
                 return;
+            case ROLE_STATE.SLIDER:
+                onStand();
+                this.moveLogic(this.lastMoveDir);
+                return;
         }
 
         // 只有待机时可操作（主动状态）
@@ -405,8 +410,10 @@ export class RoleControl extends Component {
         }
     }
 
+    protected lastMoveDir: MOVE_DIR = null;
     // 移动逻辑
     protected moveLogic(dir: MOVE_DIR, speed: number = null) {
+        this.lastMoveDir = dir;
         // if (!speed || speed > this.moveSpeed) {
         //     speed = this.moveSpeed;
         // } else {
