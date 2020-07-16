@@ -9,6 +9,7 @@
   "_techIdx": 2,
   "_defines": [
     {
+      "USE_INSTANCING": true,
       "USE_TEXTURE": true
     }
   ],
