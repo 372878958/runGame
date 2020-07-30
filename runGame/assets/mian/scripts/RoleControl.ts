@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, v3, systemEvent, SystemEvent, macro, Touch, LabelComponent, tween, Tween, SkeletalAnimationComponent, AnimationComponent, Vec3 } from 'cc';
+import { _decorator, Component, Node, v3, systemEvent, SystemEvent, macro, Touch, LabelComponent, tween, Tween, SkeletalAnimationComponent, AnimationComponent, Vec3, animation, AnimationState } from 'cc';
 import { GridBase } from './GridBase';
 import { PositionCorrection } from './PositionCorrection';
 import { GridCheckPoint } from './GridCheckPoint';
@@ -23,6 +23,7 @@ export enum ROLE_STATE {
     DEAD,           // 死亡
     TRANSFER,       // 传送
     SLIDER,         // 滑动中
+    IMPACT,         // 撞击动作
 }
 
 // 移动方向
@@ -80,11 +81,11 @@ export class RoleControl extends Component {
         if (this._invincible != b) {
             this._invincible = b;
             if (b) {
-                this.animation.play();
+                this.animation.play("主角无敌");
             } else {
-                this.animation.stop();
-                let s = this.animation.getState(this.animation.defaultClip.name);
+                let s = this.animation.getState("主角无敌");
                 if (s) {
+                    s.stop();
                     s.setTime(0);
                     s.sample();
                 }
@@ -136,13 +137,16 @@ export class RoleControl extends Component {
     public curMoveGrids: GridBase[] = [];                // 是否站在移动的格子上(用引用计数的形式表现)
     public curCheckPoint: GridCheckPoint = null;         // 当前检查点
 
+    @property({
+        type:SkeletalAnimationComponent,
+        displayName:"模型动画"
+    })
     protected skeletalAnimation: SkeletalAnimationComponent = null; // 骨骼动画
     // protected moveDir: ROLE_STATE = ROLE_STATE.NULL;   // 当前移动方向
     protected curEquipAttr: number = 0;  // 当前装备包含属性 
 
     onLoad() {
         RoleControl.instance = this;
-        this.skeletalAnimation = this.modelNode.getComponent(SkeletalAnimationComponent);
         this.skeletalAnimation.stop();
     }
 
@@ -283,6 +287,11 @@ export class RoleControl extends Component {
                 onStand();
                 // 播放受阻动画 todo
                 this.roleState = ROLE_STATE.STAND;
+                return;
+            case ROLE_STATE.IMPACT: // 撞击动作
+                onStand();
+                // 播放撞击动作
+                this.playImpatAni();
                 return;
             case ROLE_STATE.MOVE_BACK: // 回退
                 // 根据状态设置移动方向
@@ -632,6 +641,16 @@ export class RoleControl extends Component {
     // 角色是否是活着的
     isLive() {
         return this.HP > 0 && this.getRoleState() != ROLE_STATE.DEAD;
+    }
+
+    // 播放撞击动作
+    playImpatAni() {
+        this.animation.once(AnimationComponent.EventType.FINISHED, (eventType: string, b: AnimationState) => {
+            if (b && b.name == "主角撞击") {
+                this.setState(ROLE_STATE.STAND);
+            }
+        });
+        this.animation.play("主角撞击");
     }
 
     // 计算两点距离(不算y轴)

@@ -50,11 +50,11 @@
       }
     ],
     "_commonTargets": [],
-    "_hash": 3045976391
+    "_hash": 3012654031
   },
   {
     "__type__": "cc.animation.HierarchyPath",
-    "path": "Role/RootNode/Role"
+    "path": "root/Role/RootNode/Role"
   },
   {
     "__type__": "cc.animation.ComponentPath",
