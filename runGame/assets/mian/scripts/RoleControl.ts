@@ -478,7 +478,33 @@ export class RoleControl extends Component {
     }
 
     // 所有格子
-    allGrid: GridBase[] = [];
+    protected allGrid: GridBase[] = [];
+
+    // 添加格子
+    addGrid(grid: GridBase) {
+        this.allGrid.push(grid);
+    }
+
+    // 删除格子
+    removeGrid(grid: GridBase) {
+        let i = this.allGrid.indexOf(grid);
+        if (i >= 0) {
+            this.allGrid.splice(i, 1);
+            return true;
+        }
+        return false;
+    }
+
+    // 根据位置获取格子todo 考虑是否优化
+    getGridByPos(v3: Vec3): GridBase {
+        for (let v of this.allGrid) {
+            if (v.getPos().equals(v3)) {
+                return v;
+            }
+        }
+        return null;
+    }
+
 
     // 移动后逻辑
     protected onMoveAfter() {

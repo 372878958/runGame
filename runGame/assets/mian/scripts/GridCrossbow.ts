@@ -81,6 +81,11 @@ export class GridCrossbow extends GridAnimation {
         if (this.arrowNode) {
             // this.arrowBaseX = this.arrowNode.node.position.x;
             this.arrowNode.setDamageCallback(this.shootEnd.bind(this));
+            this.arrowNode.setCollisionCallback((grid)=>{
+                if (grid != this) {
+                    this.shootEnd();
+                }
+            });
         }
     }
 

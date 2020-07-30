@@ -4,6 +4,7 @@ import { RoleControl, ROLE_STATE, MOVE_DIR } from './RoleControl';
 const { ccclass, property, menu, icon } = _decorator;
 
 type DamageCallback = (damage: number) => void;
+type CollisionCallback = (tarGrid: GridBase) => void;
 
 export enum GRID_TYPE {
     实体,
@@ -12,6 +13,7 @@ export enum GRID_TYPE {
     击退伤害,
     触发,
     滑块,
+    箭矢,
     // slider
 }
 Enum(GRID_TYPE);
@@ -77,7 +79,7 @@ export class GridBase extends PositionCorrection {
         type: CCInteger,
         displayName: "伤害",
         visible: function () {
-            return this.gridType == GRID_TYPE.击退伤害 || this.gridType == GRID_TYPE.区域伤害 || this.gridType == GRID_TYPE.实体伤害;
+            return this.gridType == GRID_TYPE.击退伤害 || this.gridType == GRID_TYPE.区域伤害 || this.gridType == GRID_TYPE.箭矢 || this.gridType == GRID_TYPE.实体伤害;
         }
     })
     protected damage: number = 1;
@@ -107,7 +109,7 @@ export class GridBase extends PositionCorrection {
         this.onLoad();
     }
 
-    getType() {
+    getGridType() {
         return this.gridType;
     }
 
@@ -141,10 +143,7 @@ export class GridBase extends PositionCorrection {
     }
 
     protected removeSelfOnRole() {
-        let i = RoleControl.instance.allGrid.indexOf(this);
-        if (i >= 0) {
-            RoleControl.instance.allGrid.splice(i, 1);
-        }
+        RoleControl.instance.removeGrid(this);
     }
 
     onEnable() {
@@ -152,7 +151,7 @@ export class GridBase extends PositionCorrection {
         // this.node.on(Node.EventType.TRANSFORM_CHANGED, this.onTransformChanged, this);
         this.lastWorldPos = v3(this.node.worldPosition);
         this.removeSelfOnRole();
-        RoleControl.instance.allGrid.push(this);
+        RoleControl.instance.addGrid(this);
         // 执行角色待机逻辑
         RoleControl.instance.passivelyLogic(this);
         // 刷新装备属性影响
@@ -229,7 +228,7 @@ export class GridBase extends PositionCorrection {
         this._isPlayerEnter = false;
         let tarPos = PositionCorrection.correction(pos);
         let selfPos = this.getPos();
-        let gridType = this.getType();
+        let gridType = this.getGridType();
         switch (gridType) {
             case GRID_TYPE.触发:
                 if (Vec3.strictEquals(selfPos, tarPos)) { // 进入范围
@@ -254,7 +253,21 @@ export class GridBase extends PositionCorrection {
             case GRID_TYPE.区域伤害:
             case GRID_TYPE.实体伤害:
             case GRID_TYPE.击退伤害:
-                if (Vec3.strictEquals(selfPos, tarPos)) { // 进入范围
+            case GRID_TYPE.箭矢:
+                // 判断箭矢是否与实体碰撞
+                if (this.collisionCallback && gridType == GRID_TYPE.箭矢) { // 击中实体
+                    let grid = RoleControl.instance.getGridByPos(this.getPos());
+                    if (grid && grid != this &&
+                        (
+                            grid.getGridType() == GRID_TYPE.实体 ||
+                            grid.getGridType() == GRID_TYPE.实体伤害 ||
+                            grid.getGridType() == GRID_TYPE.滑块
+                        )) {
+                        this.collisionCallback(grid);
+                        return null;
+                    }
+                }
+                if (Vec3.strictEquals(selfPos, tarPos)) { // 击中目标
                     this._isPlayerEnter = true;
                     // 伤害判定 如果活着
                     let isLive = this.onDamage();
@@ -277,7 +290,7 @@ export class GridBase extends PositionCorrection {
     onMoveBefore(pos: Vec3): ROLE_STATE {
         let tarPos = PositionCorrection.correction(pos);
         let selfPos = this.getPos();
-        switch (this.getType()) {
+        switch (this.getGridType()) {
             case GRID_TYPE.实体:
             case GRID_TYPE.实体伤害:
             case GRID_TYPE.滑块:
@@ -288,6 +301,7 @@ export class GridBase extends PositionCorrection {
             case GRID_TYPE.区域伤害:
             case GRID_TYPE.实体伤害:
             case GRID_TYPE.击退伤害:
+            case GRID_TYPE.箭矢:
                 // 移动中的伤害块，会提前检测伤害（防止时间差 错过伤害）
                 if (this.curMoveDir != null) {
                     return this.onMoveAfter(pos);
@@ -303,7 +317,7 @@ export class GridBase extends PositionCorrection {
         this._isPlayerEnter = false;
         let tarPos = PositionCorrection.correction(pos);
         let selfPos = this.getPos();
-        let gridType = this.getType()
+        let gridType = this.getGridType()
         switch (gridType) {
             case GRID_TYPE.触发:
                 if (Vec3.strictEquals(selfPos, tarPos)) { // 进入范围
@@ -333,6 +347,7 @@ export class GridBase extends PositionCorrection {
             case GRID_TYPE.区域伤害:
             case GRID_TYPE.实体伤害:
             case GRID_TYPE.击退伤害:
+            case GRID_TYPE.箭矢:
                 return this.onMoveAfter(pos);
         }
         return null;
@@ -347,7 +362,13 @@ export class GridBase extends PositionCorrection {
         return ret;
     }
 
+    // 碰撞判定回调
+    protected collisionCallback: CollisionCallback = null;
+    public setCollisionCallback(cb: CollisionCallback) {
+        this.collisionCallback = cb;
+    }
 
+    // 伤害判定回调
     protected damageCallback: DamageCallback = null;
     public setDamageCallback(cb: DamageCallback) {
         this.damageCallback = cb;
