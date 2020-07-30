@@ -1,6 +1,6 @@
-import { _decorator, v3, Enum, Vec3, Node, CCBoolean, ModelComponent, math, CCInteger } from 'cc';
+import { _decorator, v3, Enum, Vec3, Node, CCBoolean, ModelComponent, CCInteger } from 'cc';
 import { PositionCorrection } from './PositionCorrection';
-import { RoleControl, ROLE_STATE, MOVE_DIR } from './RoleControl';
+import { RoleControl, ROLE_STATE } from './RoleControl';
 const { ccclass, property, menu, icon } = _decorator;
 
 type DamageCallback = (damage: number) => void;
@@ -159,6 +159,8 @@ export class GridBase extends PositionCorrection {
         RoleControl.instance.passivelyLogic(this);
         // 刷新装备属性影响
         this.onEquipAttr();
+        // 所有激光束重新检测
+        GridBase.rayCheck();
     }
 
     onDisable() {
@@ -170,6 +172,8 @@ export class GridBase extends PositionCorrection {
             RoleControl.instance.passivelyLogic(this);
         }
         this.reset();
+        // 所有激光束重新检测
+        GridBase.rayCheck();
     }
 
     protected lastWorldPos: Vec3 = Vec3.ZERO;
@@ -221,8 +225,11 @@ export class GridBase extends PositionCorrection {
         }
     }
 
-    // 响应坐标便哈
+    // 响应坐标变化
     protected onPosChange() {
+        RoleControl.instance.recordGridPos(this, true);
+        // 所有激光束重新检测
+        GridBase.rayCheck();
         // 执行角色待机逻辑
         RoleControl.instance.passivelyLogic(this);
     }
@@ -237,7 +244,7 @@ export class GridBase extends PositionCorrection {
         switch (gridType) {
             case GRID_TYPE.触发:
             case GRID_TYPE.已碎状态:
-                if (Vec3.strictEquals(selfPos, tarPos)) { // 进入范围
+                if (this.isInGrid(tarPos, selfPos)) { // 进入范围
                     this._isPlayerEnter = true;
                     if (gridType == GRID_TYPE.已碎状态) {
                         this.playBreakAni();
@@ -247,14 +254,14 @@ export class GridBase extends PositionCorrection {
             case GRID_TYPE.实体:
             case GRID_TYPE.滑块:
             case GRID_TYPE.可碎实体:
-                if (Vec3.strictEquals(selfPos, tarPos)) { // 遇到障碍
+                if (this.isInGrid(tarPos, selfPos)) { // 遇到障碍
                     if (gridType == GRID_TYPE.可碎实体) {
                         this.onRupture();
                     }
                     return ROLE_STATE.MOVE_BACK;
                 }
                 --tarPos.y;
-                if (Vec3.strictEquals(selfPos, tarPos)) { // 站在地面
+                if (this.isInGrid(tarPos, selfPos)) { // 站在地面
                     this.playerIsStandByThis = true;
                     if (gridType == GRID_TYPE.滑块) {
                         return ROLE_STATE.SLIDER;
@@ -269,27 +276,29 @@ export class GridBase extends PositionCorrection {
             case GRID_TYPE.箭矢:
                 // 判断箭矢是否与实体碰撞
                 if (this.collisionCallback && gridType == GRID_TYPE.箭矢) { // 击中实体
-                    let targetGrid = RoleControl.instance.getGridByPos(this.getPos());
-                    if (targetGrid && targetGrid != this) {
-                        let targetGridType = targetGrid.getGridType();
-                        if (
-                            targetGridType == GRID_TYPE.实体 ||
-                            targetGridType == GRID_TYPE.实体伤害 ||
-                            targetGridType == GRID_TYPE.滑块 ||
-                            targetGridType == GRID_TYPE.可碎实体
-                        ) {
-                            // 击中可碎实体
-                            if (targetGridType == GRID_TYPE.可碎实体) {
-                                targetGrid.onRupture();
+                    let grids = RoleControl.instance.getGridByPos(this.getPos());
+                    for (let targetGrid of grids) {
+                        if (targetGrid && targetGrid != this) {
+                            let targetGridType = targetGrid.getGridType();
+                            if (
+                                targetGridType == GRID_TYPE.实体 ||
+                                targetGridType == GRID_TYPE.实体伤害 ||
+                                targetGridType == GRID_TYPE.滑块 ||
+                                targetGridType == GRID_TYPE.可碎实体
+                            ) {
+                                // 击中可碎实体
+                                if (targetGridType == GRID_TYPE.可碎实体) {
+                                    targetGrid.onRupture();
+                                }
+                                this.collisionCallback(targetGrid);
+                                return null;
+                            } else if (targetGridType == GRID_TYPE.已碎状态) {
+                                targetGrid.playBreakAni();
                             }
-                            this.collisionCallback(targetGrid);
-                            return null;
-                        } else if (targetGridType == GRID_TYPE.已碎状态) {
-                            targetGrid.playBreakAni();
                         }
                     }
                 }
-                if (Vec3.strictEquals(selfPos, tarPos)) { // 击中目标
+                if (this.isInGrid(tarPos, selfPos)) { // 击中目标
                     this._isPlayerEnter = true;
                     // 伤害判定 如果活着
                     let isLive = this.onDamage();
@@ -318,7 +327,7 @@ export class GridBase extends PositionCorrection {
             case GRID_TYPE.实体伤害:
             case GRID_TYPE.滑块:
             case GRID_TYPE.可碎实体:
-                if (Vec3.strictEquals(selfPos, tarPos)) { // 遇到障碍
+                if (this.isInGrid(tarPos, selfPos)) { // 遇到障碍
                     if (gridType == GRID_TYPE.可碎实体) {
                         this.onRupture();
                         return ROLE_STATE.IMPACT; // 播放撞击动作
@@ -350,7 +359,7 @@ export class GridBase extends PositionCorrection {
         switch (gridType) {
             case GRID_TYPE.触发:
             case GRID_TYPE.已碎状态:
-                if (Vec3.strictEquals(selfPos, tarPos)) { // 进入范围
+                if (this.isInGrid(tarPos, selfPos)) { // 进入范围
                     this._isPlayerEnter = true;
                     if (gridType == GRID_TYPE.已碎状态) {
                         this.playBreakAni();
@@ -360,7 +369,7 @@ export class GridBase extends PositionCorrection {
             case GRID_TYPE.实体:
             case GRID_TYPE.滑块:
             case GRID_TYPE.可碎实体:
-                if (Vec3.strictEquals(selfPos, tarPos)) { // 被实体推走
+                if (this.isInGrid(tarPos, selfPos)) { // 被实体推走
                     this._isPlayerEnter = true;
                     if (gridType == GRID_TYPE.可碎实体) {
                         // 如果可碎，则产生破裂
@@ -373,7 +382,7 @@ export class GridBase extends PositionCorrection {
                     }
                 }
                 --tarPos.y;
-                if (Vec3.strictEquals(selfPos, tarPos)) { // 站在地面
+                if (this.isInGrid(tarPos, selfPos)) { // 站在地面
                     if (this.enabled) { // 如果有效则站立
                         this.playerIsStandByThis = true;
                         if (gridType == GRID_TYPE.可碎实体) {
@@ -393,6 +402,12 @@ export class GridBase extends PositionCorrection {
                 return this.onMoveAfter(pos);
         }
         return null;
+    }
+
+    // 是否在格子范围内
+    protected isInGrid(tarPos: Vec3, selfPos: Vec3 = null): boolean {
+        !selfPos ? selfPos = this.getPos() : selfPos;
+        return Vec3.strictEquals(tarPos, selfPos);
     }
 
     // 破裂判定
@@ -432,5 +447,16 @@ export class GridBase extends PositionCorrection {
     // 响应主角装备属性
     onEquipAttr() {
 
+    }
+
+    // 射线检测(虚函数)
+    protected rayCheck() { }
+    /////////////////////////////////////////////////////////////////////////////////
+    protected static allLaserBeam: GridBase[] = []; // 所有激光束
+    // 所有激光束重新检测
+    public static rayCheck() {
+        for (let v of GridBase.allLaserBeam) {
+            v.rayCheck();
+        }
     }
 }

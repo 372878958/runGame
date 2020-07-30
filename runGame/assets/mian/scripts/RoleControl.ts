@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, v3, systemEvent, SystemEvent, macro, Touch, LabelComponent, tween, Tween, SkeletalAnimationComponent, AnimationComponent, Vec3, animation, AnimationState } from 'cc';
+import { _decorator, Component, Node, v3, systemEvent, SystemEvent, macro, Touch, LabelComponent, tween, Tween, SkeletalAnimationComponent, AnimationComponent, Vec3, animation, AnimationState, TERRAIN_HEIGHT_BASE } from 'cc';
 import { GridBase } from './GridBase';
 import { PositionCorrection } from './PositionCorrection';
 import { GridCheckPoint } from './GridCheckPoint';
@@ -138,8 +138,8 @@ export class RoleControl extends Component {
     public curCheckPoint: GridCheckPoint = null;         // 当前检查点
 
     @property({
-        type:SkeletalAnimationComponent,
-        displayName:"模型动画"
+        type: SkeletalAnimationComponent,
+        displayName: "模型动画"
     })
     protected skeletalAnimation: SkeletalAnimationComponent = null; // 骨骼动画
     // protected moveDir: ROLE_STATE = ROLE_STATE.NULL;   // 当前移动方向
@@ -491,11 +491,13 @@ export class RoleControl extends Component {
 
     // 添加格子
     addGrid(grid: GridBase) {
+        this.recordGridPos(grid, true);
         this.allGrid.push(grid);
     }
 
     // 删除格子
     removeGrid(grid: GridBase) {
+        this.recordGridPos(grid, false);
         let i = this.allGrid.indexOf(grid);
         if (i >= 0) {
             this.allGrid.splice(i, 1);
@@ -504,16 +506,61 @@ export class RoleControl extends Component {
         return false;
     }
 
-    // 根据位置获取格子todo 考虑是否优化
-    getGridByPos(v3: Vec3): GridBase {
-        for (let v of this.allGrid) {
-            if (v.getPos().equals(v3)) {
-                return v;
+
+    protected allGridLastPos: { [uuid: string]: Vec3 } = {}; // 记录所有格子最后的坐标
+    protected allGridMap: { [x: number]: { [y: number]: { [z: number]: GridBase[] } } } = {};// 格子地图
+
+    // 记录格子坐标
+    recordGridPos(grid: GridBase, isRecord: boolean) {
+        // 先删除最后位置
+        let lastPos = this.allGridLastPos[grid.uuid];
+        if (lastPos) {
+            let grids = this.getGridByPos(lastPos);
+            if (grids.length) {
+                let i = grids.indexOf(grid);
+                if (i >= 0) {
+                    grids.splice(i, 1);
+                }
             }
+            this.allGridLastPos[grid.uuid] = null;
         }
-        return null;
+        if (isRecord) {
+            // 记录当前位置
+            let pos = grid.getPos();
+            if (!this.allGridMap[pos.x]) {
+                this.allGridMap[pos.x] = {};
+            }
+            if (!this.allGridMap[pos.x][pos.y]) {
+                this.allGridMap[pos.x][pos.y] = {};
+            }
+            if (!this.allGridMap[pos.x][pos.y][pos.z]) {
+                this.allGridMap[pos.x][pos.y][pos.z] = [];
+            }
+            this.allGridMap[pos.x][pos.y][pos.z].push(grid);
+            // 记录最后坐标
+            this.allGridLastPos[grid.uuid] = grid.getPos();
+        }
     }
 
+    // 根据位置获取格子todo 考虑是否优化
+    getGridByPos(v3: Vec3): GridBase[] {
+        let x = this.allGridMap[v3.x];
+        if (x) {
+            let y = x[v3.y];
+            if (y) {
+                let z = y[v3.z];
+                if (z) {
+                    return z;
+                }
+            }
+        }
+        // for (let v of this.allGrid) {
+        //     if (v.getPos().equals(v3)) {
+        //         return [v];
+        //     }
+        // }
+        return [];
+    }
 
     // 移动后逻辑
     protected onMoveAfter() {
@@ -635,6 +682,10 @@ export class RoleControl extends Component {
     // 取消无敌时间
     uninvincibleTime() {
         this.invincible = false;
+        if (this.roleState == ROLE_STATE.DROP) {
+            // 掉落就不检测了
+            return;
+        }
         this.scheduleOnce(this.onMoveAfter); // 不这样写的话，无敌时间有时会无限长
     }
 

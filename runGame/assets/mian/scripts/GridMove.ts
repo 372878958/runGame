@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, ITriggerEvent, Vec3, v3 } from 'cc';
+import { _decorator, v3 } from 'cc';
 import { RoleControl, EQUIP_ATTR } from './RoleControl';
 import { GridAnimationDelay } from './GridAnimationDelay';
 const { ccclass, property, menu } = _decorator;
