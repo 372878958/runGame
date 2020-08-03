@@ -34,6 +34,14 @@ export enum MOVE_DIR {
     RIGHT,
 }
 
+// 转动方向
+enum TURN_DIR {
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
+}
+
 // 装备属性
 export enum EQUIP_ATTR {
     MOVE_SLOW = 1 << 1,     // 移动减速
@@ -293,6 +301,9 @@ export class RoleControl extends Component {
                 // 播放撞击动作
                 this.playImpatAni();
                 return;
+            case ROLE_STATE.JUMP_TO:
+                onStand();
+                return;
             case ROLE_STATE.MOVE_BACK: // 回退
                 // 根据状态设置移动方向
                 let moveDir: MOVE_DIR = null;
@@ -355,67 +366,82 @@ export class RoleControl extends Component {
                 this.rotateTween.stop();
                 this.rotateTween = null;
             }
-            // 转向
-            let rotateSpeed = 720;// 转向速度 每秒/角度
-            switch (this.roleState) {
-                case ROLE_STATE.MOVE_UP:
-                    this.rotateTween = tween(this.modelNode)
-                        .to(Math.abs(this.modelNode.eulerAngles.y) / rotateSpeed, { eulerAngles: v3(0, 0, 0) })
-                        .call(() => {
-                            this.rotateTween = null;
-                        })
-                        .start();
-                    break;
-                case ROLE_STATE.MOVE_DOWN:
-                    let rotateY = this.modelNode.eulerAngles.y > 0 ? 180 : -180; // 防止旋转270度
-                    this.rotateTween = tween(this.modelNode)
-                        .to(Math.abs(this.modelNode.eulerAngles.y - rotateY) / rotateSpeed, { eulerAngles: v3(0, rotateY, 0) })
-                        .call(() => {
-                            this.rotateTween = null;
-                        })
-                        .start();
-                    break;
-                case ROLE_STATE.MOVE_LEFT:
-                    if (this.modelNode.eulerAngles.y == -180) { // 防止旋转270度
-                        this.modelNode.eulerAngles = v3(0, 180, 0);
-                    }
-                    this.rotateTween = tween(this.modelNode)
-                        .to(Math.abs(this.modelNode.eulerAngles.y - 90) / rotateSpeed, { eulerAngles: v3(0, 90, 0) })
-                        .call(() => {
-                            this.rotateTween = null;
-                        })
-                        .start();
-                    break;
-                case ROLE_STATE.MOVE_RIGHT:
-                    if (this.modelNode.eulerAngles.y == 180) { // 防止旋转270度
-                        this.modelNode.eulerAngles = v3(0, -180, 0);
-                    }
-                    this.rotateTween = tween(this.modelNode)
-                        .to(Math.abs(this.modelNode.eulerAngles.y + 90) / rotateSpeed, { eulerAngles: v3(0, -90, 0) })
-                        .call(() => {
-                            this.rotateTween = null;
-                        })
-                        .start();
-                    break;
-            }
             // 根据状态设置移动方向
+            let turnDir: TURN_DIR = null;
             let moveDir: MOVE_DIR = null;
             switch (this.roleState) {
                 case ROLE_STATE.MOVE_UP:
                     moveDir = MOVE_DIR.UP;
+                    turnDir = TURN_DIR.UP;
                     break;
                 case ROLE_STATE.MOVE_DOWN:
                     moveDir = MOVE_DIR.DOWN;
+                    turnDir = TURN_DIR.DOWN;
                     break;
                 case ROLE_STATE.MOVE_LEFT:
                     moveDir = MOVE_DIR.LEFT;
+                    turnDir = TURN_DIR.LEFT;
                     break;
                 case ROLE_STATE.MOVE_RIGHT:
                     moveDir = MOVE_DIR.RIGHT;
+                    turnDir = TURN_DIR.RIGHT;
                     break;
             }
+            // 转向
+            this.turn(turnDir);
             // 移动逻辑
             this.moveLogic(moveDir);
+        }
+    }
+
+    // 转向
+    protected turn(dir: TURN_DIR) {
+        // 先停止转动
+        if (this.rotateTween) {
+            this.rotateTween.stop();
+            this.rotateTween = null;
+        }
+        let rotateSpeed = 720;// 转向速度 每秒/角度
+        switch (dir) {
+            case TURN_DIR.UP:
+                this.rotateTween = tween(this.modelNode)
+                    .to(Math.abs(this.modelNode.eulerAngles.y) / rotateSpeed, { eulerAngles: v3(0, 0, 0) })
+                    .call(() => {
+                        this.rotateTween = null;
+                    })
+                    .start();
+                break;
+            case TURN_DIR.DOWN:
+                let rotateY = this.modelNode.eulerAngles.y > 0 ? 180 : -180; // 防止旋转270度
+                this.rotateTween = tween(this.modelNode)
+                    .to(Math.abs(this.modelNode.eulerAngles.y - rotateY) / rotateSpeed, { eulerAngles: v3(0, rotateY, 0) })
+                    .call(() => {
+                        this.rotateTween = null;
+                    })
+                    .start();
+                break;
+            case TURN_DIR.LEFT:
+                if (this.modelNode.eulerAngles.y == -180) { // 防止旋转270度
+                    this.modelNode.eulerAngles = v3(0, 180, 0);
+                }
+                this.rotateTween = tween(this.modelNode)
+                    .to(Math.abs(this.modelNode.eulerAngles.y - 90) / rotateSpeed, { eulerAngles: v3(0, 90, 0) })
+                    .call(() => {
+                        this.rotateTween = null;
+                    })
+                    .start();
+                break;
+            case TURN_DIR.RIGHT:
+                if (this.modelNode.eulerAngles.y == 180) { // 防止旋转270度
+                    this.modelNode.eulerAngles = v3(0, -180, 0);
+                }
+                this.rotateTween = tween(this.modelNode)
+                    .to(Math.abs(this.modelNode.eulerAngles.y + 90) / rotateSpeed, { eulerAngles: v3(0, -90, 0) })
+                    .call(() => {
+                        this.rotateTween = null;
+                    })
+                    .start();
+                break;
         }
     }
 
@@ -702,6 +728,65 @@ export class RoleControl extends Component {
             }
         });
         this.animation.play("主角撞击");
+    }
+
+    protected jumpSpeed = 20;
+    protected jumpTween: Tween = null;
+    protected jumpTween2: Tween = null;
+    // 跳跃至
+    jumpTo(worldPos: Vec3) {
+        // 先停止之前跳跃
+        if (this.jumpTween) {
+            this.jumpTween.stop();
+            this.jumpTween = null;
+        }
+        if (this.jumpTween2) {
+            this.jumpTween2.stop();
+            this.jumpTween2 = null;
+            this.modelNode.position = v3(0, 0, 0);
+        }
+        // 计算跳跃方向
+        let x = worldPos.x - this.node.position.x;
+        let z = worldPos.z - this.node.position.z;
+        if (Math.abs(x) >= Math.abs(z)) {
+            // 横向
+            if (x > 0) {
+                // 向右
+                this.turn(TURN_DIR.RIGHT);
+            } else if (x < 0) {
+                // 向左
+                this.turn(TURN_DIR.LEFT);
+            }
+        } else {
+            // 纵向
+            if (z > 0) {
+                // 向下
+                this.turn(TURN_DIR.DOWN);
+            } else if (z < 0) {
+                // 向上
+                this.turn(TURN_DIR.UP);
+            }
+        }
+        // 计算跳跃距离
+        let dis = v3(worldPos).subtract(this.node.position).length();
+        // 跳跃所需时间
+        let needTime = dis / this.jumpSpeed;
+        this.jumpTween = tween(this.node)
+            .to(needTime, { position: worldPos }, { easing: 'sineOut' })
+            .call(() => {
+                this.jumpTween = null;
+                this.setState(ROLE_STATE.STAND);
+            })
+            .start();
+
+        this.jumpTween2 = tween(this.modelNode)
+            .to(needTime / 2, { position: v3(0, 1, 0) })//, { easing: 'sineOut' })
+            .to(needTime / 2, { position: v3(0, 0, 0) })//, { easing: 'sineIn' })
+            .call(() => {
+                this.jumpTween2 = null;
+                this.modelNode.position = v3(0, 0, 0);
+            })
+            .start();
     }
 
     // 计算两点距离(不算y轴)
